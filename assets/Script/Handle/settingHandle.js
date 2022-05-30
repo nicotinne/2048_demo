@@ -15,6 +15,7 @@ cc.Class({
 
     properties: {
         btnQuit: cc.Button,
+        btnClose: cc.Button,
         slideVolume: cc.Slider,
         cbMute: cc.Toggle,
 
@@ -29,6 +30,12 @@ cc.Class({
     start () {
         this.slideVolume.node.on("slide", this.onChange, this);
         this.cbMute.node.on("toggle", this.onToggle, this);
+        this.btnClose.node.on("click", this.onClick, this);
+    },
+
+    onClick() {
+        emitter.instance.emit("CLOSE_SETTING");
+        cc.log("close setting");
     },
 
     onToggle(toggle) {
@@ -37,7 +44,7 @@ cc.Class({
     },
 
     onChange(slide) {
-        cc.log(slide.progress);
+        cc.log(typeof slide.progress);
         emitter.instance.emit("VOLUME", slide.progress);
     },
     

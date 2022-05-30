@@ -354,22 +354,17 @@
     "_id": ""
   },
   {
-    "__type__": "cb4bcixDeRGp7yvJ31dhztz",
+    "__type__": "1bcdfbXBldLn7PBihrf5T+d",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "lblCard": {
+    "contentCard": {
       "__id__": 6
     },
-    "_handleMoveUp": null,
-    "_handleMoveDown": null,
-    "_handleMoveLeft": null,
-    "_handleMoveRight": null,
-    "_handleDoneRandom": null,
-    "_action": null,
+    "stringCard": null,
     "_id": ""
   },
   {

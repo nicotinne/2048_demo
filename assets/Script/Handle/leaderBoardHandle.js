@@ -9,6 +9,7 @@
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
 const User = require("User");
 const emitter = require("mEmitter");
+
 cc.Class({
     extends: cc.Component,
 
@@ -17,46 +18,42 @@ cc.Class({
         prefab: cc.Prefab,
         btnClose: cc.Button,
 
-        users: [],
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    //onLoad () {},
+    onLoad () {
+        
+    },
 
     start () {
-        this.users = [
-            new User("nicotin", "10"),
-            new User("toanvune", "100"),
-            new User("cocos2d", "23"),
-            new User("javascript", "50")
-        ];
-
         this._renderAll();
 
         this.btnClose.node.on("click", this.onClick, this);
     },
 
     onClick() {
-        let asd = "";
-        //sadhabsdbhaskd
-         asd = "koko";
-        if(asd != "") {
+        
             emitter.instance.emit("CLOSE_LEADERBOARD");
-
             cc.log("close leader board");
-        }
     },
 
     _renderAll() {
-        
-        this.sortData();
-        this.users.forEach((user, index) => {
-            let item = this._createItem(user, index);
+        // this.sortData();
+        // this.users.forEach((user, index) => {
+        //     let item = this._createItem(user, index);
+        //     this.checkTop(item);
+        // });
+        // cc.log(this.users);
 
-            this.checkTop(item);
-        });
-        cc.log(this.users);
+        let data = JSON.parse(cc.sys.localStorage.getItem("users"));
+        if (data != null) {
+            let arr = this.sortData(data);
+            arr.forEach((user, index) => {
+                let item = this._createItem(user, index);
+                this.checkTop(item);
+            })
+        }
     },
 
     checkTop(item) {
@@ -71,10 +68,11 @@ cc.Class({
         }
     },
 
-    sortData() {
-        this.users = this.users.sort((a, b) => {
+    sortData(arr) {
+        arr = arr.sort((a, b) => {
             return b.score - a.score;
         })
+        return arr;
     },
 
     _createItem(user, index) {
@@ -86,6 +84,8 @@ cc.Class({
         item.getChildByName("score").getComponent("cc.Label").string = user.score;
         return item;
     },
+
+    
 
     // update (dt) {},
 });

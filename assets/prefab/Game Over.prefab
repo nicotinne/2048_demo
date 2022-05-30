@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "GameOver",
+    "_name": "Game Over",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -37,7 +37,7 @@
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 3,
     "_components": [
       {
         "__id__": 42

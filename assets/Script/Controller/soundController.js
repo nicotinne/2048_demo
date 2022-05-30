@@ -7,26 +7,16 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+const emitter = require("mEmitter");
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        btnStart: cc.Button,
+        btnPlus: cc.Button,
+        btnEnd: cc.Button,
+
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -34,7 +24,26 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        this.btnStart.node.on("click", this.onClickStart, this);
+        this.btnPlus.node.on("click", this.onClickPlus, this);
+        this.btnEnd.node.on("click", this.onClickEnd, this);
 
+    },
+
+    onClickStart() {
+        cc.log("play start");
+        emitter.instance.emit("PLAYSOUNDSTART");
+    },
+
+    onClickPlus() {
+        cc.log("play plus");
+        emitter.instance.emit("PLAYSOUNDPLUS");
+    },
+
+    onClickEnd() {
+        cc.log("play end");
+        emitter.instance.emit("PLAYSOUNDEND");
+        emitter.instance.emit("GAMEOVER");
     },
 
     // update (dt) {},

@@ -7,34 +7,61 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+const emitter = require("mEmitter");
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        leaderBoard: cc.Node,
+        settingLayer: cc.Node,
+        gameOver: cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.openLeader = this.onOpenLeader.bind(this);
+        this.closeLeader = this.onCloseLeader.bind(this);
+        this.openSetting = this.onOpenSetting.bind(this);
+        this.closeSetting = this.onCloseSetting.bind(this);
+        this.openGameOver = this.onOpenGameOver.bind(this);
+        this.closeGameOver = this.onCloseGameOver.bind(this);
+
+        emitter.instance.registerEvent("LEADERBOARD", this.openLeader);
+        emitter.instance.registerEvent("CLOSE_LEADERBOARD", this.closeLeader);
+        emitter.instance.registerEvent("SETTING", this.openSetting);
+        emitter.instance.registerEvent("CLOSE_SETTING", this.closeSetting);
+        emitter.instance.registerEvent("GAMEOVER", this.openGameOver);
+        emitter.instance.registerEvent("CLOSE_GAMEOVER", this.closeGameOver);
+    },
 
     start () {
 
+    },
+
+    onOpenGameOver() {
+        this.gameOver.active = true;
+        emitter.instance.emit("OPEN_GAMEOVER", 100);
+    },
+
+    onCloseGameOver() {
+        this.gameOver.active = false;
+    },
+
+    onOpenSetting() {
+        this.settingLayer.active = true;
+    },
+
+    onCloseSetting() {
+        this.settingLayer.active = false;
+    },
+
+    onOpenLeader() {
+        this.leaderBoard.active = true;
+    },
+
+    onCloseLeader() {
+        this.leaderBoard.active = false;
     },
 
     // update (dt) {},

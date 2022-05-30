@@ -21,7 +21,7 @@ cc.Class({
         game: null,
         // _gameOverState: null,
         lobby: null,
-        
+        click: null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -31,23 +31,23 @@ cc.Class({
 
         this.lobby = this.onLobby.bind(this);
         this.game = this.onGame.bind(this);
-        // this._gameOverState = this.onGameOver.bind(this);
 
         emitter.instance.registerEvent("LOBBYLAYER", this.lobby);
-        emitter.instance.registerEvent("GAMEPLAYER", this.game);
-        // emitter.instance.registerEvent("GAMEOVER", this._gameOverState);
-        // emitter.instance.registerEvent("RANK", this._rankState);
+        emitter.instance.registerEvent("GAMELAYER", this.game);
     },
 
     start () {
 
     },
 
+    
+
     onLobby() {
         cc.log("lobby")
     },
     
     onGame() {
+        this.gameLayer.active = true;
         cc.log("game")
     }
 
