@@ -25,8 +25,6 @@ cc.Class({
 
     onLoad() {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
-
-        this.registerEvent();
         this.createCard();
         this.randomCard();
     },
