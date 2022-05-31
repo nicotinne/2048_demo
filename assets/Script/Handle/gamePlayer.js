@@ -1,9 +1,7 @@
 const Emitter = require("mEmitter");
 const COLOR = require("Color");
-
 cc.Class({
     extends: cc.Component,
-
     properties: {
         _handleMoveDown: null,
         _handleMoveUp: null,
@@ -22,7 +20,6 @@ cc.Class({
         newValue: null,
         arrAnim: [],
     },
-
     onLoad() {
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
         this.createCard();
@@ -49,16 +46,15 @@ cc.Class({
                 break;
         }
     },
-
     moveUp() {
         for (let col = 0; col < 4; col++) {
             let flatArrCard = [0, 0, 0, 0];
             for (let row = 0; row < 4; row++) {
                 flatArrCard[row] = this._arrBlocks[row][col];
             }
-            this.handle(flatArrCard)
+            this.handleMove(flatArrCard)
         }
-        this.runAnim();
+        this.runAnimMoveCard();
     },
     moveDown() {
         for (let col = 0; col < 4; col++) {
@@ -66,36 +62,31 @@ cc.Class({
             for (let row = 0; row < 4; row++) {
                 flatArrCard[row] = this._arrBlocks[row][col];
             }
-            this.handle(flatArrCard.reverse())
-
+            this.handleMove(flatArrCard.reverse())
         }
-        this.runAnim();
+        this.runAnimMoveCard();
     },
-
     moveLeft() {
         for (let row = 0; row < 4; row++) {
             let flatArrCard = [0, 0, 0, 0];
             for (let col = 0; col < 4; col++) {
                 flatArrCard[col] = this._arrBlocks[row][col];
             }
-            this.handle(flatArrCard)
+            this.handleMove(flatArrCard)
         }
-        this.runAnim();
+        this.runAnimMoveCard();
     },
-
-
     moveRight() {
         for (let row = 0; row < 4; row++) {
             let flatArrCard = [0, 0, 0, 0];
             for (let col = 0; col < 4; col++) {
                 flatArrCard[col] = this._arrBlocks[row][col];
             }
-            this.handle(flatArrCard.reverse())
+            this.handleMove(flatArrCard.reverse())
         }
-        this.runAnim();
+        this.runAnimMoveCard();
     },
-
-    runAnim() {
+    runAnimMoveCard() {
         if (this.arrAnim.length == 0) {
             this._canPress = false;
             return;
@@ -107,7 +98,7 @@ cc.Class({
                         .call(() => {
                             this.arrAnim = []
                         })
-                        .delay(0.1)
+                        .delay(0.105)
                         .call(() => {
                             this._canPress = false;
                             this.randomCard();
@@ -119,10 +110,8 @@ cc.Class({
             }
         }
     },
-
-
-    handle(arrCard) {
-        let mergeCardTrue = [];
+    handleMove(arrCard) {
+        let hadMerge = [];
         for (let i = 1; i < arrCard.length; i++) {
             if (arrCard[i].getComponent("card").stringCard == "") {
                 continue;
@@ -134,16 +123,43 @@ cc.Class({
                     j = -1;
                     break;
                 }
-                checkCompare = this.changeValueCards(arrCard, i, j, objAnim, mergeCardTrue);
+                checkCompare = this.changeValueCards(arrCard, i, j, objAnim, hadMerge);
             }
             let cloneObjAnim = Object.assign(objAnim);
-            let animCard = this.handleMove(cloneObjAnim.selfCard, cloneObjAnim.otherCard, cloneObjAnim.callBack);
+            let animCard = this.defineAnimMoveCard(cloneObjAnim.selfCard, cloneObjAnim.otherCard, cloneObjAnim.callBack);
             if (animCard != undefined) {
                 this.arrAnim.push(animCard);
             }
         }
     },
-
+    defineAnimMoveCard(selfCard, otherCard, callBack) {
+        if (selfCard != null && otherCard != null) {
+            let x = otherCard.x;
+            let y = otherCard.y;
+            let xOld = selfCard.x;
+            let yOld = selfCard.y;
+            return cc.tween(selfCard)
+                .to(0.055, { position: cc.v2(x, y) },{easing:"sineIn"})
+                .to(0, { position: cc.v2(xOld, yOld) })
+                .call(() => callBack(selfCard, otherCard))
+                .call(()=>{Emitter.instance.emit("changedValue")})
+        }
+    },
+    changeValueCards(arrCard, i, j, objAnim, hadMerge) {
+        if (arrCard[j].getComponent("card").stringCard == "") {
+            if( j ==0 ){
+                return this.compareNull(arrCard,i , j, objAnim);
+            }
+        }
+        else {
+            if (arrCard[j].getComponent("card").stringCard == arrCard[i].getComponent("card").stringCard) {
+                return this.compareEqual(arrCard,i , j, objAnim,hadMerge);
+            }
+            else if (arrCard[j].getComponent("card").stringCard != arrCard[i].getComponent("card").stringCard) {
+                return this.compareDifferent(arrCard,i , j, objAnim);
+            }
+        }
+    },
     compareNull(arrCard,i , j, objAnim) {
         let callBack = function (selfCard, otherCard) {
             otherCard.getComponent("card").contentCard.string = otherCard.getComponent("card").stringCard;
@@ -158,18 +174,16 @@ cc.Class({
         objAnim.selfCard.getComponent("card").stringCard = "";
         return true;
     },
-
-    compareEqual(arrCard,i , j, objAnim, mergeCardTrue) {
-        if (mergeCardTrue.indexOf(j) != -1) {
+    compareEqual(arrCard,i , j, objAnim, hadMerge) {
+        if (hadMerge.indexOf(j) != -1) {
             let oldJ = j+1;
             return this.compareNull(arrCard,i,oldJ,objAnim);
         }
-        mergeCardTrue.push(j);
+        hadMerge.push(j);
         let callBack = function (selfCard, otherCard) {
             otherCard.getComponent("card").contentCard.string = otherCard.getComponent("card").stringCard;
             selfCard.getComponent("card").contentCard.string = "";
-            let action = cc.sequence(cc.scaleTo(0.1, 1.2), cc.delayTime(0.3), cc.scaleTo(0.1, 1))
-            otherCard.runAction(action);
+            otherCard.getComponent("card").animCompareEqual();
             otherCard.opacity = 255;
             selfCard.opacity = 0;
         }
@@ -180,7 +194,6 @@ cc.Class({
         objAnim.selfCard.getComponent("card").stringCard = "";
         return true;
     },
-
     compareDifferent(arrCard,i , j, objAnim) {
         let reValue = j + 1;
         if (reValue != i) {
@@ -198,36 +211,6 @@ cc.Class({
         }
         return true;
     },
-
-    changeValueCards(arrCard, i, j, objAnim, mergeCardTrue) {
-        if (arrCard[j].getComponent("card").stringCard == "") {
-            if( j ==0 ){
-                return this.compareNull(arrCard,i , j, objAnim);
-            }
-        }
-        else {
-            if (arrCard[j].getComponent("card").stringCard == arrCard[i].getComponent("card").stringCard) {
-                return this.compareEqual(arrCard,i , j, objAnim,mergeCardTrue);
-            }
-            else if (arrCard[j].getComponent("card").stringCard != arrCard[i].getComponent("card").stringCard) {
-                return this.compareDifferent(arrCard,i , j, objAnim);
-            }
-        }
-    },
-    handleMove(selfCard, otherCard, callBack) {
-        if (selfCard != null && otherCard != null) {
-            let x = otherCard.x;
-            let y = otherCard.y;
-            let xOld = selfCard.x;
-            let yOld = selfCard.y;
-            return cc.tween(selfCard)
-                .to(0.1, { position: cc.v2(x, y) })
-                .to(0, { position: cc.v2(xOld, yOld) })
-                .call(() => callBack(selfCard, otherCard))
-        }
-
-    },
-
     createCard() {
         for (let col = 0; col < 4; col++) {
             let arrRow = [];
@@ -249,14 +232,13 @@ cc.Class({
             this._arrBlocks.push(arrRow)
         }
     },
-
     randomCard() {
         let flatArray = this._arrBlocks.flat(Infinity);
         let arrNone = flatArray.filter((value) => {
             return value.getComponent("card").stringCard == "";
         })
         let index = Math.floor(Math.random() * arrNone.length)
-        let arrRandomNum = [2];
+        let arrRandomNum = [2,4];
         let num = arrRandomNum[Math.floor(Math.random() * arrRandomNum.length)]
         arrNone[index].getComponent("card").contentCard.string = num;
         arrNone[index].color = COLOR[2];
