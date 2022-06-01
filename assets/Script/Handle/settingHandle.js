@@ -24,7 +24,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-       
+        
     },
 
     start () {
@@ -33,8 +33,13 @@ cc.Class({
         this.btnClose.node.on("click", this.onClick, this);
     },
 
+    onOpen() {
+        let t = this.doOpen();
+        t.clone().start();
+    },
+
     onClick() {
-        emitter.instance.emit("CLOSE_SETTING");
+       emitter.instance.emit("CLOSE_SETTING");
         cc.log("close setting");
     },
 

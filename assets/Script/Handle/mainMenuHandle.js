@@ -32,15 +32,20 @@ cc.Class({
     },
 
     onClickRank() {
+        emitter.instance.emit("CLOSE_LOBBY");
         emitter.instance.emit("LEADERBOARD", this.node);
         cc.log("click rank");
     },
 
     onClickSetting() {
+        emitter.instance.emit("CLOSE_LOBBY");
         emitter.instance.emit("SETTING", this.node);
         cc.log("click setting");
     },
 
+    emitCloseMenu() {
+        
+    }
     
     // update (dt) {},
 });

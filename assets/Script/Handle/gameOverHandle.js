@@ -10,6 +10,7 @@ cc.Class({
         btnSubmit: cc.Button,
         lblScore: cc.Label,
         phaoBong: cc.Node,
+        title: cc.Sprite,
 
         openGameOver: null,
         clickSubmit: null,
@@ -17,31 +18,49 @@ cc.Class({
     },
 
     // LIFE-CYCLE CALLBACKS:
-    onLoad () {
-        this.openGameOver = this.doOpenGameOver.bind(this);
+    onLoad() {
+        this.openGameOver = this.onOpenGameOver.bind(this);
         emitter.instance.registerEvent("OPEN_GAMEOVER", this.openGameOver);
     },
 
-    start () {
+    start() {
         this.checkData();
         this.btnSubmit.node.on("click", this.doSubmit, this);
-        
+
     },
 
-    doOpenGameOver(totalScore) {
+    onOpenGameOver(totalScore) {
         cc.log(totalScore)
         this.node.active = true;
         let countScore = 0;
-        let actions = [cc.callFunc(() => { 
+        let actions = [cc.callFunc(() => {
             countScore += 1;
-            if(countScore == totalScore) {
-                this.phaoBong.active = true;
+            if (countScore == totalScore) {
+
             }
         }),
-        cc.delayTime(0.001),
-        cc.callFunc(() => { this.lblScore.string = countScore})];
+        cc.delayTime(0.01),
+        cc.callFunc(() => {
+            this.lblScore.string = countScore;
+            if (this.lblScore.string == 100) {
+                this.phaoBong.active = true;
+                let t = this.doAnimTitle();
+                t.clone(this.title.node).repeatForever().start();
+            }
+        })];
         this.lblScore.node.runAction(cc.repeat(cc.sequence(actions), totalScore));
-        
+
+    },
+
+    doAnimTitle() {
+        let t = cc.tween()
+            .to(0.3, { position: cc.v2(0, 218)})
+            .by(0.3, { position: cc.v2(0, -3)}, {delayTime: 0.1}).repeat(5)
+            .by(0.3, { position: cc.v2(0, +3)}, {delayTime: 0.1}).repeat(5)
+            
+            // .to(1, { scaleY: 1, skewX: -10 })
+
+        return t;
     },
 
     getInfoUserAndPushToArray() {
@@ -52,9 +71,9 @@ cc.Class({
     },
 
     doSubmit() {
-        if(this.edbUsername.string == "") return;
+        if (this.edbUsername.string == "") return;
         this.getInfoUserAndPushToArray();
-        if(this.users != null) {
+        if (this.users != null) {
             cc.sys.localStorage.setItem("users", JSON.stringify(this.users));
         }
         this.edbUsername.string = "";
@@ -62,7 +81,7 @@ cc.Class({
     },
 
     checkData() {
-        if(db != null) {
+        if (db != null) {
             this.users = db;
         }
     },

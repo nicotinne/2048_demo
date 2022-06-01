@@ -36,10 +36,11 @@ cc.Class({
     },
 
     start () {
-
+        cc.log(this.settingLayer.active);
     },
 
     onOpenGameOver(totalScore) {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
         cc.log(totalScore)
         this.gameOver.active = true;
         emitter.instance.emit("OPEN_GAMEOVER", totalScore);
@@ -47,22 +48,42 @@ cc.Class({
 
     onCloseGameOver() {
         this.gameOver.active = false;
+        emitter.instance.emit("rePlayGame");
     },
 
     onOpenSetting() {
-        this.settingLayer.active = true;
+        this.doOpenSetting();
     },
 
     onCloseSetting() {
-        this.settingLayer.active = false;
+        this.doCloseSetting();
+        emitter.instance.emit("LOBBYLAYER");
     },
 
     onOpenLeader() {
-        this.leaderBoard.active = true;
+        emitter.instance.emit("OPEN_LEADER");
     },
 
     onCloseLeader() {
-        this.leaderBoard.active = false;
+        emitter.instance.emit("LOBBYLAYER");
+    },
+
+    doOpenSetting() {
+        let t = cc.tween(this.settingLayer)
+                        .call(() => {
+                            this.settingLayer.active = true;
+                        })
+                        .to(0.7, { scale: 1, position: cc.v2(0, 0)}, {easing: "sineIn"})
+        return t.start();                      
+    },
+
+    doCloseSetting() {
+        let t = cc.tween(this.settingLayer)
+                        .to(0.7, { scaleX: 0, position: cc.v2(0, -620)}, {easing: "sineIn"})
+                        .call(() => {
+                            this.settingLayer.active = false;
+                        })
+        return t.start();             
     },
 
     // update (dt) {},

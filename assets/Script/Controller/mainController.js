@@ -26,30 +26,76 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
+    onLoad() {
         emitter.instance = new emitter();
 
         this.lobby = this.onLobby.bind(this);
         this.game = this.onGame.bind(this);
+        this.closeLobby = this.doCloseLobby.bind(this);
 
         emitter.instance.registerEvent("LOBBYLAYER", this.lobby);
         emitter.instance.registerEvent("GAMELAYER", this.game);
+        emitter.instance.registerEvent("CLOSE_LOBBY", () => {this.doCloseLobby().start()}, this);
     },
 
-    start () {
-
+    start() {
+        this.onLobby();
     },
-
-    
 
     onLobby() {
         cc.log("lobby")
+        this.doLobby().start();
     },
-    
+
     onGame() {
-        this.gameLayer.active = true;
-        cc.log("game")
-    }
+        cc.log("game");
+        this.doCloseLobby().start();
+        this.doOpenGameLayer().start();
+    },
+
+    doLobby() {
+        let t = cc.tween(this.lobbyLayer)
+            .call(() => {
+                this.lobbyLayer.active = true;
+            })
+            .delay(0.4)
+            .to(0.9, { position: cc.v2(0, 0) }, { easing: "backOut" });
+
+        return t;
+    },
+
+    doCloseLobby() {
+        let t = cc.tween(this.lobbyLayer)
+            .delay(0.4)
+            .to(0.9, { position: cc.v2(0, 630) }, { easing: "backOut" })
+            .call(() => {
+                this.lobbyLayer.active = false;
+            })
+
+        return t;
+    },
+
+    doOpenGameLayer() {
+        let t = cc.tween(this.gameLayer)
+            .delay(0.9)
+            .call(() => {
+                this.gameLayer.active = true;
+            })
+            .to(0.9, { scale: 1, rotation: 720 }, { easing: "sineIn" });
+
+        return t;
+    },
+
+    doCloseGameLayer() {
+        let t = cc.tween(this.gameLayer)
+            .to(0.9, { scale: 0, rotation: 720 }, { easing: "sineIn" })
+            .call(() => {
+                this.gameLayer.active = false;
+            })
+            .delay(0.5)
+        return t;
+    },
+
 
     // update (dt) {},
 });

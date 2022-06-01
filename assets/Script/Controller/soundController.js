@@ -16,7 +16,6 @@ cc.Class({
         btnPlus: cc.Button,
         btnEnd: cc.Button,
 
-
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -24,10 +23,20 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.btnStart.node.on("click", this.onClickStart, this);
-        this.btnPlus.node.on("click", this.onClickPlus, this);
-        this.btnEnd.node.on("click", this.onClickEnd, this);
+        
+        this.startSound = this.onClickStart.bind(this);
+        this.endSound = this.onClickEnd.bind(this);
+        this.inputSound = this.onClickPlus.bind(this);
 
+        emitter.instance.registerEvent("GAMELAYER", this.startSound);
+        emitter.instance.registerEvent("GAMEOVER", this.endSound);
+        emitter.instance.registerEvent("INPUT", this.inputSound);
+
+        this.btnEnd.node.on("click", this.onClick, this)
+    },
+
+    onClick() {
+        emitter.instance.emit("GAMEOVER", 100);
     },
 
     onClickStart() {
@@ -36,14 +45,13 @@ cc.Class({
     },
 
     onClickPlus() {
-        cc.log("play plus");
+        cc.log("play input");
         emitter.instance.emit("PLAYSOUNDPLUS");
     },
 
     onClickEnd() {
         cc.log("play end");
         emitter.instance.emit("PLAYSOUNDEND");
-        emitter.instance.emit("GAMEOVER");
     },
 
     // update (dt) {},
