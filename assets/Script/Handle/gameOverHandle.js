@@ -42,7 +42,7 @@ cc.Class({
         cc.delayTime(0.01),
         cc.callFunc(() => {
             this.lblScore.string = countScore;
-            if (this.lblScore.string == 100) {
+            if (this.lblScore.string == totalScore.toString()) {
                 this.phaoBong.active = true;
                 let t = this.doAnimTitle();
                 t.clone(this.title.node).repeatForever().start();
