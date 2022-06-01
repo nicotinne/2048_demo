@@ -1,0 +1,20 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "2048block.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "2048block_01": {
+      "__uuid__": "47479c46-1ebf-4486-9a3b-b280fbda24b5"
+    },
+    "2048block_02": {
+      "__uuid__": "3569afe5-04ce-4b2b-a39e-fa74a41fbccf"
+    },
+    "2048block_03": {
+      "__uuid__": "d70664e0-5ec8-459c-916d-338798938adb"
+    },
+    "2048block_04": {
+      "__uuid__": "3d3dbd41-84be-4ac0-82af-dcdc41d754ae"
+    }
+  }
+}

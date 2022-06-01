@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "daythung_01",
+    "texture": "a595e759-8438-4008-bca9-244fa371760e",
+    "atlas": "a8ae96e4-e62d-4db2-9cad-0d22562df01a",
+    "rect": [
+      0,
+      88,
+      979,
+      48
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      979,
+      48
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

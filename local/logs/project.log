@@ -1,0 +1,88 @@
+2022-06-01T02:21:50.867Z - normal: Load ~/.CocosCreator/settings.json
+2022-06-01T02:21:50.921Z - normal: Initializing Asset Database
+2022-06-01T02:21:50.923Z - normal: checking language setting...
+2022-06-01T02:21:50.923Z - normal: Language: en
+2022-06-01T02:21:51.674Z - success: preview server running at http://localhost:7456
+2022-06-01T02:21:51.685Z - success: protocol editor-framework registered
+2022-06-01T02:21:51.685Z - success: protocol app registered
+2022-06-01T02:21:51.685Z - success: protocol theme registered
+2022-06-01T02:21:51.685Z - success: protocol packages registered
+2022-06-01T02:21:51.686Z - success: protocol uuid registerred
+2022-06-01T02:21:51.686Z - success: protocol db registerred
+2022-06-01T02:21:51.686Z - success: protocol thumbnail registerred
+2022-06-01T02:21:51.686Z - success: protocol unpack registerred
+2022-06-01T02:21:51.686Z - success: protocol disable-commonjs registerred
+2022-06-01T02:21:53.055Z - normal: connected!
+2022-06-01T02:21:53.056Z - normal: Check project /Users/fe-phuongminh/Desktop/game2048/toan2048/2048_demo
+2022-06-01T02:21:53.058Z - normal: Initializing project /Users/fe-phuongminh/Desktop/game2048/toan2048/2048_demo
+2022-06-01T02:21:53.425Z - normal: Initializing Cocos2d
+2022-06-01T02:21:54.159Z - normal: Initializing engine extends
+2022-06-01T02:21:54.177Z - success: alipay-adapter loaded
+2022-06-01T02:21:54.183Z - success: asset-db-debugger loaded
+2022-06-01T02:21:54.188Z - success: baidu-adapter loaded
+2022-06-01T02:21:54.189Z - success: color-picker loaded
+2022-06-01T02:21:54.318Z - success: fb-audience-network loaded
+2022-06-01T02:21:54.374Z - success: fb-live-stream loaded
+2022-06-01T02:21:54.378Z - success: google-play-instant loaded
+2022-06-01T02:21:54.384Z - success: huawei-runtime loaded
+2022-06-01T02:21:54.619Z - success: cpk-publish loaded
+2022-06-01T02:21:54.621Z - success: jsb-adapter loaded
+2022-06-01T02:21:54.628Z - success: oppo-runtime loaded
+2022-06-01T02:21:54.634Z - success: package-manager loaded
+2022-06-01T02:21:54.781Z - success: qqplay-adapter loaded
+2022-06-01T02:21:54.785Z - success: runtime-dev-tools loaded
+2022-06-01T02:21:54.796Z - success: sdkbox loaded
+2022-06-01T02:21:54.801Z - success: tester loaded
+2022-06-01T02:21:54.806Z - success: ui-kit-preview-extra loaded
+2022-06-01T02:21:54.810Z - success: ui-kit-preview loaded
+2022-06-01T02:21:54.815Z - success: ui-kit loaded
+2022-06-01T02:21:54.822Z - success: vivo-runtime loaded
+2022-06-01T02:21:54.824Z - success: weapp-adapter loaded
+2022-06-01T02:21:54.826Z - success: xiaomi-adapter loaded
+2022-06-01T02:21:54.831Z - success: alipay-minigame loaded
+2022-06-01T02:21:54.874Z - success: assets loaded
+2022-06-01T02:21:54.877Z - success: builder loaded
+2022-06-01T02:21:55.160Z - success: cocos-services loaded
+2022-06-01T02:21:55.165Z - success: console loaded
+2022-06-01T02:21:55.194Z - success: fb-instant-games loaded
+2022-06-01T02:21:55.199Z - success: game-window loaded
+2022-06-01T02:21:55.200Z - success: google-instant-games loaded
+2022-06-01T02:21:55.205Z - success: hierarchy loaded
+2022-06-01T02:21:55.210Z - success: inspector loaded
+2022-06-01T02:21:55.212Z - success: keystore loaded
+2022-06-01T02:21:55.218Z - success: node-library loaded
+2022-06-01T02:21:55.220Z - success: package-asset loaded
+2022-06-01T02:21:55.222Z - success: preferences loaded
+2022-06-01T02:21:55.225Z - success: project-exporter loaded
+2022-06-01T02:21:55.231Z - success: project-importer loaded
+2022-06-01T02:21:55.235Z - success: project-settings loaded
+2022-06-01T02:21:55.239Z - success: scene loaded
+2022-06-01T02:21:55.241Z - success: simulator-debugger loaded
+2022-06-01T02:21:55.243Z - success: sprite-editor loaded
+2022-06-01T02:21:55.247Z - success: store loaded
+2022-06-01T02:21:55.255Z - success: timeline loaded
+2022-06-01T02:21:55.260Z - success: xiaomi-runtime loaded
+2022-06-01T02:21:57.770Z - info: Cocos Services load base data!
+2022-06-01T02:22:00.025Z - normal: Loading packages
+2022-06-01T02:22:00.030Z - normal: Watching packages
+2022-06-01T02:22:00.115Z - normal: Run Application
+2022-06-01T02:22:04.014Z - warn: Script attached to "card" in prefab "card.prefab" is missing or invalid. Detailed information:
+Node path: "card"
+Asset url: "db://assets/prefab/card.prefab"
+Script UUID: "1bcdf6d7-0657-4b9f-b3c1-8a1adfe53f9d"
+Class ID: "1bcdfbXBldLn7PBihrf5T+d"
+
+2022-06-01T02:24:29.740Z - warn: Script attached to "card" in prefab "card.prefab" is missing or invalid. Detailed information:
+Node path: "card"
+Asset url: "db://assets/prefab/card.prefab"
+Script UUID: "1bcdf6d7-0657-4b9f-b3c1-8a1adfe53f9d"
+Class ID: "1bcdfbXBldLn7PBihrf5T+d"
+
+2022-06-01T02:24:29.774Z - warn: Script attached to "card" in prefab "card.prefab" is missing or invalid. Detailed information:
+Node path: "card"
+Asset url: "db://assets/prefab/card.prefab"
+Script UUID: "1bcdf6d7-0657-4b9f-b3c1-8a1adfe53f9d"
+Class ID: "1bcdfbXBldLn7PBihrf5T+d"
+
+2022-06-01T02:24:50.354Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T02:24:52.586Z - info: Only the prefab node "card" and its child nodes are saved.

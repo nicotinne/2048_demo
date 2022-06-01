@@ -1,0 +1,29 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "smallButtonn.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "btn11": {
+      "__uuid__": "c07c764c-9005-4357-8e47-8cc920a5f78c"
+    },
+    "btn12": {
+      "__uuid__": "201827ed-e796-452b-abdf-13e8e396c749"
+    },
+    "btn13": {
+      "__uuid__": "3a690ba1-0b94-44be-b414-5a80ffba899a"
+    },
+    "btn14": {
+      "__uuid__": "5edd7700-1f80-4023-9f19-9f4794f38dcd"
+    },
+    "btn15": {
+      "__uuid__": "ee69d120-a4b9-4d0d-9004-db66ea3bbfbe"
+    },
+    "btn16": {
+      "__uuid__": "a56984a9-29da-41a9-a5dd-5166517b9de7"
+    },
+    "btn17": {
+      "__uuid__": "d3bcf28f-6057-4c54-bc1f-6a697a2e98ea"
+    }
+  }
+}

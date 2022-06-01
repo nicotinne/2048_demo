@@ -1,0 +1,11 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "sprites.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "bg_game": {
+      "__uuid__": "5109daec-973c-4249-8f3e-f44802b456d1"
+    }
+  }
+}
