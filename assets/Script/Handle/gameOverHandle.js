@@ -29,6 +29,7 @@ cc.Class({
     },
 
     doOpenGameOver(totalScore) {
+        cc.log(totalScore)
         this.node.active = true;
         let countScore = 0;
         let actions = [cc.callFunc(() => { 
@@ -37,7 +38,7 @@ cc.Class({
                 this.phaoBong.active = true;
             }
         }),
-        cc.delayTime(0.01),
+        cc.delayTime(0.001),
         cc.callFunc(() => { this.lblScore.string = countScore})];
         this.lblScore.node.runAction(cc.repeat(cc.sequence(actions), totalScore));
         

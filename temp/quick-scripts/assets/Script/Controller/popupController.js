@@ -41,9 +41,10 @@ cc.Class({
         emitter.instance.registerEvent("CLOSE_GAMEOVER", this.closeGameOver);
     },
     start: function start() {},
-    onOpenGameOver: function onOpenGameOver() {
+    onOpenGameOver: function onOpenGameOver(totalScore) {
+        cc.log(totalScore);
         this.gameOver.active = true;
-        emitter.instance.emit("OPEN_GAMEOVER", 100);
+        emitter.instance.emit("OPEN_GAMEOVER", totalScore);
     },
     onCloseGameOver: function onCloseGameOver() {
         this.gameOver.active = false;

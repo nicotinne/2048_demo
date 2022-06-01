@@ -19,6 +19,10 @@ cc.Class({
         _canPress: false,
         _rePlayGame:null,
         _closeGamePLayer: null,
+        scoreCurrent:{
+            default: null,
+            type: cc.Node
+        },
         newValue: null,
         arrAnim: [],
     },
@@ -30,6 +34,10 @@ cc.Class({
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
         this.createCard();
         this.randomCard();
+    },
+
+    start(){
+        this.rePlayGame();
     },
 
     closeGamePlayer(){
@@ -285,7 +293,7 @@ cc.Class({
         })
         if(arrNone.length == 0 ){
             if (this.checkGameOver() == false) {
-                Emitter.instance.emit("GAMEOVER");
+                Emitter.instance.emit("GAMEOVER",Number(this.scoreCurrent.getComponent(cc.Label).string));
             }
             return;
         }

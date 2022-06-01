@@ -2328,7 +2328,7 @@
         "__id__": 61
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -3834,6 +3834,9 @@
     "_canPress": false,
     "_rePlayGame": null,
     "_closeGamePLayer": null,
+    "scoreCurrent": {
+      "__id__": 65
+    },
     "newValue": null,
     "arrAnim": [],
     "_id": "b6UWqF9/pNm5Rp69c7iyiX"

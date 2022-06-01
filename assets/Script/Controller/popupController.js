@@ -39,9 +39,10 @@ cc.Class({
 
     },
 
-    onOpenGameOver() {
+    onOpenGameOver(totalScore) {
+        cc.log(totalScore)
         this.gameOver.active = true;
-        emitter.instance.emit("OPEN_GAMEOVER", 100);
+        emitter.instance.emit("OPEN_GAMEOVER", totalScore);
     },
 
     onCloseGameOver() {
