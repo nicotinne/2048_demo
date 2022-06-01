@@ -12,6 +12,4 @@ var COLOR = {
     1024 : cc.color(146, 208, 80, 255),
     2048 : cc.color(0, 176, 240, 255),
 };
-
-
 module.exports = COLOR;
