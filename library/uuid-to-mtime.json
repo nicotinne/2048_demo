@@ -430,8 +430,8 @@
     "relativePath": "prefab/bottom Menu.prefab"
   },
   "a436b44c-9b51-423a-b6bd-1ab0241f23f8": {
-    "asset": 1654050292589,
-    "meta": 1654050292595,
+    "asset": 1654058023788,
+    "meta": 1654058023797,
     "relativePath": "prefab/card.prefab"
   },
   "a55e63a8-8cde-4049-b986-bbac6d384cbe": {
@@ -550,8 +550,8 @@
     "relativePath": "Scene"
   },
   "2d2f792f-a40c-49bb-a189-ed176a246e49": {
-    "asset": 1654050296789,
-    "meta": 1654050296797,
+    "asset": 1654074048618,
+    "meta": 1654074048627,
     "relativePath": "Scene/helloworld.fire"
   },
   "4734c20c-0db8-4eb2-92ea-e692f4d70934": {
@@ -569,11 +569,6 @@
     "meta": 1654050119305,
     "relativePath": "resource/image/item/sprites.png"
   },
-  "b07e8a5b-be8b-493f-92dd-0a3470c53686": {
-    "asset": 1654050088368,
-    "meta": 1654050119342,
-    "relativePath": "Script/Controller/mainController.js"
-  },
   "4364541e-1841-4295-a93b-6e5fdf7865cd": {
     "asset": 1654050088368,
     "meta": 1654050119356,
@@ -589,11 +584,6 @@
     "meta": 1654050119373,
     "relativePath": "Script/Controller/soundController.js"
   },
-  "055192d9-bef0-4f1e-a9b3-15be7384d4dc": {
-    "asset": 1654050088369,
-    "meta": 1654050119383,
-    "relativePath": "Script/Entities/card.js"
-  },
   "375f426d-8c06-4889-91be-df443597dd78": {
     "asset": 1654050088369,
     "meta": 1654050119384,
@@ -604,20 +594,10 @@
     "meta": 1654050088369,
     "relativePath": "Script/Handle"
   },
-  "1bcdf6d7-0657-4b9f-b3c1-8a1adfe53f9d": {
-    "asset": 1654050088369,
-    "meta": 1654050119414,
-    "relativePath": "Script/Handle/card.js"
-  },
   "0fbe7648-1d4e-4044-b674-41e0d3e6ca2e": {
     "asset": 1654050088370,
     "meta": 1654050119503,
     "relativePath": "Script/Handle/gameOverHandle.js"
-  },
-  "62eca305-8aa2-491e-83c0-b776d6c7ce1a": {
-    "asset": 1654050088370,
-    "meta": 1654050119520,
-    "relativePath": "Script/Handle/gamePlayer.js"
   },
   "0986e88f-7e2d-4aad-aa7e-4861a9e7396a": {
     "asset": 1654050088370,
@@ -643,11 +623,6 @@
     "asset": 1654050088371,
     "meta": 1654050119584,
     "relativePath": "Script/Handle/soundHandle.js"
-  },
-  "731ca7f4-9fe2-4fb2-bb92-8600dfce1430": {
-    "asset": 1654050088371,
-    "meta": 1654050119614,
-    "relativePath": "Script/Module/Color.js"
   },
   "c26609cf-af5d-4b98-ac18-d4e562dd08eb": {
     "asset": 1654050088372,
@@ -693,5 +668,30 @@
     "asset": 1654050088372,
     "meta": 1654050119647,
     "relativePath": "Texture/HelloWorld.png"
+  },
+  "b07e8a5b-be8b-493f-92dd-0a3470c53686": {
+    "asset": 1654054241265,
+    "meta": 1654055120813,
+    "relativePath": "Script/Controller/mainController.js"
+  },
+  "731ca7f4-9fe2-4fb2-bb92-8600dfce1430": {
+    "asset": 1654057274379,
+    "meta": 1654057277604,
+    "relativePath": "Script/Module/Color.js"
+  },
+  "055192d9-bef0-4f1e-a9b3-15be7384d4dc": {
+    "asset": 1654057842844,
+    "meta": 1654057843966,
+    "relativePath": "Script/Entities/card.js"
+  },
+  "62eca305-8aa2-491e-83c0-b776d6c7ce1a": {
+    "asset": 1654073872149,
+    "meta": 1654073873330,
+    "relativePath": "Script/Handle/gamePlayer.js"
+  },
+  "66168f04-5114-4495-aa73-d5734cf9f1b7": {
+    "asset": 1654073933143,
+    "meta": 1654073934228,
+    "relativePath": "Script/Handle/bottomMenuhandle.js"
   }
 }

@@ -17,11 +17,28 @@ cc.Class({
             type: cc.Prefab
         },
         _canPress: false,
+        _rePlayGame:null,
+        _closeGamePLayer: null,
         newValue: null,
         arrAnim: [],
     },
     onLoad() {
+        this._rePlayGame = this.rePlayGame.bind(this);
+        this._closeGamePLayer = this.closeGamePlayer.bind(this);
+        Emitter.instance.registerEvent("CLOSEGAMEPLAYER",this._closeGamePLayer);
+        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
+        this.createCard();
+        this.randomCard();
+    },
+
+    closeGamePlayer(){
+        this.node.active = false;
+    },
+
+    rePlayGame(){
+        this.gameBoard.removeAllChildren();
+        this._arrBlocks = [];
         this.createCard();
         this.randomCard();
     },
@@ -29,6 +46,7 @@ cc.Class({
     handleKeyDown(evt) {
         if (this._canPress) return;
         this._canPress = true;
+        Emitter.instance.emit("INPUT");
         switch (evt.keyCode) {
             case cc.macro.KEY.up:
                 this.moveUp();
@@ -194,6 +212,7 @@ cc.Class({
         objAnim.callBack = callBack;
         objAnim.otherCard.getComponent("card").stringCard = Number(objAnim.otherCard.getComponent("card").stringCard) * 2 + "";
         objAnim.selfCard.getComponent("card").stringCard = "";
+        Emitter.instance.emit("updateScore",Number(objAnim.otherCard.getComponent("card").stringCard));
         return true;
     },
     compareDifferent(arrCard, i, j, objAnim) {
@@ -263,7 +282,6 @@ cc.Class({
         let arrNone = flatArray.filter((value) => {
             return value.getComponent("card").stringCard == "";
         })
-        cc.log(arrNone.length);
         if(arrNone.length == 0 ){
             if (this.checkGameOver() == false) {
                 Emitter.instance.emit("GAMEOVER");

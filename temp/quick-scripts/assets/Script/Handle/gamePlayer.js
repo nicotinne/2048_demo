@@ -23,17 +23,33 @@ cc.Class({
             type: cc.Prefab
         },
         _canPress: false,
+        _rePlayGame: null,
+        _closeGamePLayer: null,
         newValue: null,
         arrAnim: []
     },
     onLoad: function onLoad() {
+        this._rePlayGame = this.rePlayGame.bind(this);
+        this._closeGamePLayer = this.closeGamePlayer.bind(this);
+        Emitter.instance.registerEvent("CLOSEGAMEPLAYER", this._closeGamePLayer);
+        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
+        this.createCard();
+        this.randomCard();
+    },
+    closeGamePlayer: function closeGamePlayer() {
+        this.node.active = false;
+    },
+    rePlayGame: function rePlayGame() {
+        this.gameBoard.removeAllChildren();
+        this._arrBlocks = [];
         this.createCard();
         this.randomCard();
     },
     handleKeyDown: function handleKeyDown(evt) {
         if (this._canPress) return;
         this._canPress = true;
+        Emitter.instance.emit("INPUT");
         switch (evt.keyCode) {
             case cc.macro.KEY.up:
                 this.moveUp();
@@ -96,6 +112,7 @@ cc.Class({
 
         if (this.arrAnim.length == 0) {
             this._canPress = false;
+            this.randomCard(true);
             return;
         } else {
             for (var i = 0; i <= this.arrAnim.length; i++) {
@@ -105,6 +122,7 @@ cc.Class({
                     }).delay(0.105).call(function () {
                         _this._canPress = false;
                         _this.randomCard();
+                        _this.randomCard(true);
                     }).start();
                     return;
                 }
@@ -192,6 +210,7 @@ cc.Class({
         objAnim.callBack = callBack;
         objAnim.otherCard.getComponent("card").stringCard = Number(objAnim.otherCard.getComponent("card").stringCard) * 2 + "";
         objAnim.selfCard.getComponent("card").stringCard = "";
+        Emitter.instance.emit("updateScore", Number(objAnim.otherCard.getComponent("card").stringCard));
         return true;
     },
     compareDifferent: function compareDifferent(arrCard, i, j, objAnim) {
@@ -211,6 +230,29 @@ cc.Class({
         }
         return true;
     },
+    checkGameOver: function checkGameOver() {
+        for (var x = 0; x < 4; x++) {
+            for (var y = 0; y < 4; y++) {
+                if (x == 3) continue;
+                var self = this._arrBlocks[x][y].getComponent("card").stringCard;
+                var other = this._arrBlocks[x + 1][y].getComponent("card").stringCard;
+                if (self == other) {
+                    return true;
+                }
+            }
+        }
+        for (var _x = 0; _x < 4; _x++) {
+            for (var _y = 0; _y < 4; _y++) {
+                if (_y == 3) continue;
+                var _self = this._arrBlocks[_x][_y].getComponent("card").stringCard;
+                var _other = this._arrBlocks[_x][_y + 1].getComponent("card").stringCard;
+                if (_self == _other) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    },
     createCard: function createCard() {
         for (var col = 0; col < 4; col++) {
             var arrRow = [];
@@ -224,7 +266,6 @@ cc.Class({
                 newCard.width = 140;
                 newCard.height = 140;
                 newCard.opacity = 0;
-                newCard.color = COLOR[0];
                 newCard.getComponent("card").stringCard = "";
                 cc.log(newCard.getComponent("card").contentCard.string);
                 arrRow.push(newCard);
@@ -233,15 +274,25 @@ cc.Class({
         }
     },
     randomCard: function randomCard() {
+        var check = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
         var flatArray = this._arrBlocks.flat(Infinity);
         var arrNone = flatArray.filter(function (value) {
             return value.getComponent("card").stringCard == "";
         });
+        if (arrNone.length == 0) {
+            if (this.checkGameOver() == false) {
+                Emitter.instance.emit("GAMEOVER");
+                cc.log("game over");
+            }
+            return;
+        }
+        if (check) return;
         var index = Math.floor(Math.random() * arrNone.length);
         var arrRandomNum = [2, 4];
         var num = arrRandomNum[Math.floor(Math.random() * arrRandomNum.length)];
         arrNone[index].getComponent("card").contentCard.string = num;
-        arrNone[index].color = COLOR[2];
+        arrNone[index].getComponent("card").backgroundCard.color = COLOR[Number(num)];
         arrNone[index].opacity = 255;
         arrNone[index].getComponent("card").stringCard = num + "";
         var action = cc.scaleTo(0.3, 1);

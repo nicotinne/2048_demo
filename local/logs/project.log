@@ -86,3 +86,14 @@ Class ID: "1bcdfbXBldLn7PBihrf5T+d"
 
 2022-06-01T02:24:50.354Z - info: Only the prefab node "card" and its child nodes are saved.
 2022-06-01T02:24:52.586Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:19:33.275Z - warn: The 'type' attribute of 'card.backgroundCard' is undefined when loading script
+2022-06-01T04:19:59.470Z - warn: The 'type' attribute of 'card.backgroundCard' is undefined when loading script
+2022-06-01T04:20:28.289Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:20:47.820Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:21:17.877Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:22:20.169Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:23:05.192Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:23:33.626Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:30:44.269Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:31:41.451Z - info: Only the prefab node "card" and its child nodes are saved.
+2022-06-01T04:33:43.770Z - info: Only the prefab node "card" and its child nodes are saved.

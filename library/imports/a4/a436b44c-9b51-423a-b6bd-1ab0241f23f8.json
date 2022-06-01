@@ -364,6 +364,9 @@
     "contentCard": {
       "__id__": 6
     },
+    "backgroundCard": {
+      "__id__": 2
+    },
     "stringCard": null,
     "_id": ""
   },

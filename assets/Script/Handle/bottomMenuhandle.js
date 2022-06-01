@@ -1,40 +1,52 @@
-// Learn cc.Class:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://docs.cocos2d-x.org/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] https://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
+const Emitter = require("mEmitter");
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        lblCurrentScore: {
+            default: null,
+            type: cc.Node
+        },
+        lblBestScore: {
+            default: null,
+            type: cc.Node
+        },
+        _bestScore: null,
+        _updateScore: null,
     },
 
-    // LIFE-CYCLE CALLBACKS:
+    onLoad() {
+        this.lblCurrentScore.getComponent(cc.Label).string = 0;
+        this._bestScore = this.onBestScore.bind(this);
+        this._updateScore = this.updateScore.bind(this);
+        Emitter.instance.registerEvent("BEST_SCORE", this._bestScore);
+        Emitter.instance.registerEvent("updateScore", this._updateScore)
+    },
 
-    // onLoad () {},
+    start() {
+    },
 
-    start () {
+    onReplay() {
+        this.lblCurrentScore.getComponent(cc.Label).string = 0;
+        Emitter.instance.emit("rePlayGame");
+    },
 
+    onExitGame() {  
+        Emitter.instance.emit("CLOSEGAMEPLAYER");
+        Emitter.instance.emit("LOBBYLAYER");
+    },
+
+    updateScore(number) {
+        let currentScore = Number(this.lblCurrentScore.getComponent(cc.Label).string);
+        let actions = [cc.callFunc(() => { currentScore += 1 }),
+        cc.delayTime(0.01),
+        cc.callFunc(() => { this.lblCurrentScore.getComponent(cc.Label).string = currentScore+"" })];
+        let scale = cc.sequence(cc.scaleTo(0.15, 1.2), cc.scaleTo(0.15, 1))
+        this.lblCurrentScore.runAction(cc.spawn(cc.repeat(cc.sequence(actions), number), scale))
+    },
+
+    onBestScore(bestScore) {
+        this.lblBestScore.getComponent(cc.Label).string = bestScore;
     },
 
     // update (dt) {},
