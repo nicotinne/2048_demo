@@ -61,6 +61,7 @@ cc.Class({
                 this.moveRight();
                 break;
             default:
+                this._canPress = false;
                 break;
         }
     },
@@ -285,7 +286,6 @@ cc.Class({
         if(arrNone.length == 0 ){
             if (this.checkGameOver() == false) {
                 Emitter.instance.emit("GAMEOVER");
-                cc.log("game over")
             }
             return;
         }

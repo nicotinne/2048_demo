@@ -2327,7 +2327,7 @@
         "__id__": 61
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -2728,7 +2728,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -96.168,
+      "x": -107.889,
       "y": 29.975,
       "z": 0
     },
@@ -2773,7 +2773,7 @@
     "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_batchAsBitmap": false,
-    "_N$horizontalAlign": 1,
+    "_N$horizontalAlign": 0,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
@@ -2965,7 +2965,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 217.315,
+      "x": 197.499,
       "y": 0,
       "z": 0
     },
@@ -3057,8 +3057,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 117.401,
-      "y": 1.249,
+      "x": 157.034,
+      "y": -0.953,
       "z": 0
     },
     "_scale": {
@@ -3427,8 +3427,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 229,
-      "y": 1.249,
+      "x": 248.817,
+      "y": -0.953,
       "z": 0
     },
     "_scale": {
