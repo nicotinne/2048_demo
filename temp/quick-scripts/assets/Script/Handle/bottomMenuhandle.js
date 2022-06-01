@@ -17,15 +17,13 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        _bestScore: null,
         _updateScore: null
     },
 
     onLoad: function onLoad() {
         this.lblCurrentScore.getComponent(cc.Label).string = 0;
-        this._bestScore = this.onBestScore.bind(this);
         this._updateScore = this.updateScore.bind(this);
-        Emitter.instance.registerEvent("BEST_SCORE", this._bestScore);
+        this.onBestScore();
         Emitter.instance.registerEvent("updateScore", this._updateScore);
     },
     start: function start() {},
@@ -49,8 +47,14 @@ cc.Class({
         var scale = cc.sequence(cc.scaleTo(0.15, 1.2), cc.scaleTo(0.15, 1));
         this.lblCurrentScore.runAction(cc.spawn(cc.repeat(cc.sequence(actions), number), scale));
     },
-    onBestScore: function onBestScore(bestScore) {
-        this.lblBestScore.getComponent(cc.Label).string = bestScore;
+    onBestScore: function onBestScore() {
+        var data = JSON.parse(cc.sys.localStorage.getItem("users"));
+        if (data != null) {
+            data = data.sort(function (a, b) {
+                return parseInt(b.score) - parseInt(a.score);
+            });
+            this.lblBestScore.getComponent(cc.Label).string = data[0].score;
+        }
     }
 }
 

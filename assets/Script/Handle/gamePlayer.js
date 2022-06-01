@@ -27,17 +27,17 @@ cc.Class({
         arrAnim: [],
     },
     onLoad() {
-        this._rePlayGame = this.rePlayGame.bind(this);
-        this._closeGamePLayer = this.closeGamePlayer.bind(this);
-        Emitter.instance.registerEvent("CLOSEGAMEPLAYER",this._closeGamePLayer);
-        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
-        this.createCard();
-        this.randomCard();
+        this.rePlayGame();
     },
 
-    start(){
+    onEnable(){
         this.rePlayGame();
+    },
+
+    onDisable(){
+        Emitter.instance.removeEvent("CLOSEGAMEPLAYER",this._closeGamePLayer);
+        Emitter.instance.removeEvent("rePlayGame", this._rePlayGame);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
     },
 
     closeGamePlayer(){
@@ -45,8 +45,14 @@ cc.Class({
     },
 
     rePlayGame(){
+        this.scoreCurrent.getComponent(cc.Label).string = 0;
         this.gameBoard.removeAllChildren();
         this._arrBlocks = [];
+        this._rePlayGame = this.rePlayGame.bind(this);
+        this._closeGamePLayer = this.closeGamePlayer.bind(this);
+        Emitter.instance.registerEvent("CLOSEGAMEPLAYER",this._closeGamePLayer);
+        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
         this.createCard();
         this.randomCard();
     },

@@ -33,23 +33,28 @@ cc.Class({
         arrAnim: []
     },
     onLoad: function onLoad() {
-        this._rePlayGame = this.rePlayGame.bind(this);
-        this._closeGamePLayer = this.closeGamePlayer.bind(this);
-        Emitter.instance.registerEvent("CLOSEGAMEPLAYER", this._closeGamePLayer);
-        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
-        this.createCard();
-        this.randomCard();
-    },
-    start: function start() {
         this.rePlayGame();
+    },
+    onEnable: function onEnable() {
+        this.rePlayGame();
+    },
+    onDisable: function onDisable() {
+        Emitter.instance.removeEvent("CLOSEGAMEPLAYER", this._closeGamePLayer);
+        Emitter.instance.removeEvent("rePlayGame", this._rePlayGame);
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
     },
     closeGamePlayer: function closeGamePlayer() {
         this.node.active = false;
     },
     rePlayGame: function rePlayGame() {
+        this.scoreCurrent.getComponent(cc.Label).string = 0;
         this.gameBoard.removeAllChildren();
         this._arrBlocks = [];
+        this._rePlayGame = this.rePlayGame.bind(this);
+        this._closeGamePLayer = this.closeGamePlayer.bind(this);
+        Emitter.instance.registerEvent("CLOSEGAMEPLAYER", this._closeGamePLayer);
+        Emitter.instance.registerEvent("rePlayGame", this._rePlayGame);
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.handleKeyDown, this);
         this.createCard();
         this.randomCard();
     },

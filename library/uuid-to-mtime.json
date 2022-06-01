@@ -550,8 +550,8 @@
     "relativePath": "Scene"
   },
   "2d2f792f-a40c-49bb-a189-ed176a246e49": {
-    "asset": 1654078683911,
-    "meta": 1654078683922,
+    "asset": 1654079837051,
+    "meta": 1654079837063,
     "relativePath": "Scene/helloworld.fire"
   },
   "4734c20c-0db8-4eb2-92ea-e692f4d70934": {
@@ -674,11 +674,6 @@
     "meta": 1654057843966,
     "relativePath": "Script/Entities/card.js"
   },
-  "66168f04-5114-4495-aa73-d5734cf9f1b7": {
-    "asset": 1654073933143,
-    "meta": 1654073934228,
-    "relativePath": "Script/Handle/bottomMenuhandle.js"
-  },
   "4364541e-1841-4295-a93b-6e5fdf7865cd": {
     "asset": 1654078329560,
     "meta": 1654078347764,
@@ -689,9 +684,14 @@
     "meta": 1654078528009,
     "relativePath": "Script/Handle/gameOverHandle.js"
   },
+  "66168f04-5114-4495-aa73-d5734cf9f1b7": {
+    "asset": 1654079070466,
+    "meta": 1654079071542,
+    "relativePath": "Script/Handle/bottomMenuhandle.js"
+  },
   "62eca305-8aa2-491e-83c0-b776d6c7ce1a": {
-    "asset": 1654078678286,
-    "meta": 1654078683474,
+    "asset": 1654079832580,
+    "meta": 1654079836158,
     "relativePath": "Script/Handle/gamePlayer.js"
   }
 }
